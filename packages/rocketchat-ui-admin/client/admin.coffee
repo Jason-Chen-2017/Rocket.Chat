@@ -257,9 +257,8 @@ Template.admin.helpers
 	getColorVariable: (color) ->
 		return color.replace(/theme-color-/, '@')
 
-	isDefaultValue: (settingId) ->
-		setting = TempSettings.findOne({_id: settingId}, {fields: {value: 1, packageValue: 1}})
-		return setting.value is setting.packageValue
+	showResetButton: ->
+		return @type isnt 'asset' and @value isnt @packageValue and not @blocked
 
 Template.admin.events
 	"change .input-monitor, keyup .input-monitor": _.throttle((e, t) ->
